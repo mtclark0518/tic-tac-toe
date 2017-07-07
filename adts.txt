@@ -1,0 +1,49 @@
+ADTs
+
+
+
+
+var Squares = function(id, index, inPlay) {
+	this.id = id,
+	this.index = index,
+	this.inPlay = inPlay || false;
+}
+
+
+
+
+	position = index
+	inPlay = active
+
+	
+
+Resetbutton
+	eventListener (‘click’, resetEverything);
+
+
+Scoreboard
+	turnX = true || false
+	turnO = opposite of above.
+
+
+var Players = function(index, team, myTurn, myMoves){
+	this.index = index;
+	this.team = team;
+	this.myTurn = whoseTurn();
+	this.myMoves = [];
+	
+}
+	Player1
+		myTurn = true || false
+		gamePiece = X
+		moves = []
+			moves[i]
+			moves(position)
+	Player2
+		myTurn = true || false
+		gamePiece = O
+		moves = []
+			moves[i]
+			moves(position)
+
+MoveAccumulator = player1.moves.length + player2.moves.length
