@@ -1,0 +1,72 @@
+* {
+	box-sizing: border-box;
+	text-align: center;
+}
+/********TABLE STYLES*******/
+
+table {
+	width: 60%;
+	max-width: 390px;
+	margin: 0 auto;
+	background: pink;
+}
+
+td {
+	background: white;
+	height: 128px;
+	border: 2px solid black;
+}
+
+/********SCOREBOARD STYLES*******/
+#possesstionArrow {
+	margin: 16px auto;
+	padding: 12px;
+}
+#possesstionArrow div, img {
+	display: inline-block;
+
+}
+
+#triangleLeft {
+	width: 0;
+	height: 0;
+	border-top: 16px solid transparent;
+	border-bottom: 16px solid transparent;
+	border-right: 48px solid blue;
+	vertical-align: middle;
+
+}
+
+#triangleRight {
+	width: 0;
+	height: 0;
+	border-top: 16px solid transparent;
+	border-bottom: 16px solid transparent; 
+	border-left: 48px solid blue;
+	vertical-align: middle;
+
+}
+.team {
+	vertical-align: middle;
+	padding: 4px 16px;
+}
+#scoreboardScript {
+	padding: 4px 16px;
+}
+/********GAME PIECE STYLES*******/
+.X, .O {
+	max-width: 125px;
+	max-height: 125px;
+	display: none;
+}
+.active {
+	display: initial;
+}
+
+/********RESET BUTTON STYLES*******/
+#reset {
+	margin-top: 18px;
+	padding: 8px 64px;
+	border-radius: 2px;
+	border: 1px solid rgba(255, 255, 255, .7);
+	}
