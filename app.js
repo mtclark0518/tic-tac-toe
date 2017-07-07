@@ -31,6 +31,7 @@ var somebodyMoved = function(){
 
 
 function addToTotal(){
+	alert("Sorry. That's as far as I got last night");
 	total += 1;
 	console.log(this);
 	somebodyMoved();
