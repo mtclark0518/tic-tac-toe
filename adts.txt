@@ -1,21 +1,64 @@
 ADTs
+var Game = {
+	var gameBoard = [];
 
 
+	var Squares = function(id, index, inPlay) {
+		this.id = id;
+		this.index = index;
+		this.inPlay =  inPlay;
+		gameBoard.push(this);
+	};
+	total score
+	var Player = function(index, team, myTurn, source, myMoves){
+		this.index = index;
+		this.team = team;
+		this.myMoves = [];
+	
+	},
+	Player.prototype = {
+		whoseTurn : function(){
+			if(this.index === 0)
+				{console.log('its myturn');}
+		},
+		myMoves : function(){
+		myMoves.push('myMove');
+		}
+	};
+}
+var Game = {
+	gameBoard : [],
+	total : 0,
 
+	somebodyMoved : function(){
+		if(total % 2 === 0){
 
-var Squares = function(id, index, inPlay) {
-	this.id = id,
-	this.index = index,
-	this.inPlay = inPlay || false;
+		}
+	},
+	addToTotal : function(){
+		total++;
+		console.log(this.total);
+	},
+
+};
+
+scoreboard
+	var clickCounter = function(square){
+	square.addEventListener('click', addToTotal);
+};
+function addToTotal(){
+	alert("Sorry. That's as far as I got last night");
+	total += 1;
+	console.log(this);
+	somebodyMoved();
 }
 
 
 
 
-	position = index
-	inPlay = active
 
-	
+
+
 
 Resetbutton
 	eventListener (‘click’, resetEverything);
