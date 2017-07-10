@@ -31,11 +31,11 @@ var claimSquare = function(location, myTurn){
 					alert("It's a draw");
 					newGame();
 				}else if(total % 2 === 0){
-					var myTurn = lebron.name;
+					myTurn = lebron.name;
 					lebron.moveList.push(parseInt(location));
 					checkForWinner(lebron.moveList);
 				}else if (total % 2 === 1){
-					var myTurn = steph.name;
+					myTurn = steph.name;
 					steph.moveList.push(parseInt(location));
 					checkForWinner(steph.moveList);
 					}
@@ -54,16 +54,16 @@ function Players(name) {
 var checkForWinner = function(arr){
 	for(var i = 0; i < winner.length; i++){
 		var wincount = 0;
-		for(var j = 0; winner[i].length; j++){
-			if(arr.indexOf(winner[i][j])){
+		for(var j = 0; j < winner[i].length; j++){
+			if(arr.indexOf(winner[i][j]) !== -1){
 				wincount++;
 			}	
 		}
 		if(wincount === 3){
-			alert('game over');
-		}	
-}
+			alert('game over');}}
 };
+
+			
 
 
 
