@@ -55,14 +55,25 @@ td {
 }
 /********GAME PIECE STYLES*******/
 .X, .O {
+
+}
+.lebron {
+	height: 128px;
+	background: none;
 	max-width: 125px;
 	max-height: 125px;
-	display: none;
+	background-image: url("../img/lebron.png");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
-.active {
-	display: initial;
+.steph {
+	height: 128px;
+	max-width: 125px;
+	max-height: 125px;
+	background-image: url("../img/steph.png");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
-
 /********RESET BUTTON STYLES*******/
 #reset {
 	margin-top: 18px;

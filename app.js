@@ -1,154 +1,126 @@
-// document.addEventListener('DOMContentLoaded', function(){
-// console.log('hello');
-
-// var allSpots = document.getElementsByTagName('td');
-// var square = document.getElementsByClassName('square');
-// // var topLeft = document.getElementById('tl');
-// // var topMid = document.getElementById('tm');
-// // var topRight = document.getElementById('tr');
-// // var midLeft = document.getElementById('ml');
-// // var midMid = document.getElementById('mm');
-// // var midRight = document.getElementById('mr');
-// // var botLeft = document.getElementById('bl');
-// // var botMid = document.getElementById('bm');
-// // var botRight = document.getElementById('br');
-// var lebron = document.querySelectorAll('img.X');
-// var total = 0;
-// var steph = document.querySelector('div#steph1');
-// console.log(steph);
-// steph.classList.add('active');
-
-
-// //var clickCounter - hidden but impacting scoreboard next moves img render
-// // for (var i = 0; i < allSpots.length; i++){
-// // 	allSpots[i].classList.addClass('');
-// // }
-// //was there a click on a square
-// 	//has the square been clicked already?
-// var somebodyMoved = function(){
-// 	var lebron = this.nextSibling;
-// 	console.log(lebron);
-// 	if(total % 2 === 0) {
-			
-// 		console.log(lebron);	
-// 	}
-// };
-
-
-// function addToTotal(){
-// 	alert("Sorry. That's as far as I got last night");
-// 	total += 1;
-// 	console.log(this);
-// 	somebodyMoved();
-// }
-// //add click event listener to the game squares
-// var clickCounter = function(square){
-// 	square.addEventListener('click', addToTotal);
-// };
-// clickCounter(topLeft);
-// clickCounter(topMid);
-// clickCounter(topRight);
-// clickCounter(midLeft);
-// clickCounter(midMid);
-// clickCounter(midRight);
-// clickCounter(botLeft);
-// clickCounter(botMid);
-// clickCounter(botRight);
-
-
-
-
-
-
-
-
-
-
-// 		//if yes do nothing
-// 		//else add 1 to the click counter &
-// 		//trigger the whoseTurn function
-
-// //is click even or odd
-// });
-
-
-
-
-
-
-
-
-var gameBoard = document.querySelector('table');
-//SCORES
-	
+//document.addEventListener('DOMContentLoaded', fn, false);
 var total = 0;
+var wincount = 0;
+var winner = [["012"],["345"],["678"],["036"],["147"],["258"],["048"],["246"]];
 
-var game = {
 
-	addMove : function(){
-		total += 1;
-		console.log('clickity');
-	},
-	whoseTurn : function(){
-		if(total % 2 === 0) {
-			lebron.myTurn = true;
-			steph.myTurn = false;
-			console.log('lebron');
-		}else if(total % 2 === 1) {
-			lebron.myTurn = false;
-			steph.myTurn = true;
-			console.log('steph');
+var claimSquare = function(location, myTurn){
+			var here = document.getElementById(location);
+			here.setAttribute('inuse', 'true');
+			var stamp = here.firstChild;
+			stamp.classList.add(myTurn);
+		};
+	
+
+	var game = {
+		
+		reset : function (){
+			total = 0;
+			document.body.remove('table');
+			this.newGame();
+		},
+
+		moveStamp : function(){
+			var inuse = this.getAttribute('inuse');
+			var location = this.getAttribute('id');
+			var myTurn = '';
+			if(inuse !== true){
+				total += 1;
+				inuse = true;
+				if(total === 10){
+					alert("It's a draw");
+					newGame();
+				}else if(total % 2 === 0){
+					var myTurn = lebron.name;
+					lebron.moveList.push(parseInt(location));
+					checkForWinner(lebron.moveList);
+				}else if (total % 2 === 1){
+					var myTurn = steph.name;
+					steph.moveList.push(parseInt(location));
+					checkForWinner(steph.moveList);
+					}
+				claimSquare(location, myTurn);
+				
+			}else{return(null);}
 		}
-	}
-};
-
-var Squares = function(id, index) {
-	this.id = id;
-	this.index = index;
-	this.selected = document.querySelector('#' + id);
-	this.selected.addEventListener('click', game.addMove);
-
-};
-
-Squares.prototype = {
-	inPlay : false
-};
-
-var Player = function(index, team, myTurn, src, myMoves){
-	this.index = index;
-	this.team = team;
-	this.myTurn = myTurn;
-	this.src = src;
-	this.myMoves = myMoves || [];
 	
 };
+	
 
-Player.prototype = {
-
+function Players(name) {
+	this.name = name;
+	this.moveList = [];
+	}
+var checkForWinner = function(arr){
+	for(var i = 0; i < winner.length; i++){
+		var wincount = 0;
+		for(var j = 0; winner[i].length; j++){
+			if(arr.indexOf(winner[i][j])){
+				wincount++;
+			}	
+		}
+		if(wincount === 3){
+			alert('game over');
+		}	
+}
 };
 
-var resetButton = document.getElementById('reset');
-resetButton.addEventListener('click', newGame);
 
 
-function newGame(){
-	total = 0;
-	console.log('a new game is starting');
-	var lebron = new Player(0, "X", true, "img/lebron.png");
-	var steph = new Player(1, "O", false, "img/steph.png");
-	var tl = new Squares('tl', 0);
-	var tm = new Squares('tm', 1);
-	var tr = new Squares('tr', 2);
-	var ml = new Squares('ml', 3);
-	var mm = new Squares('mm', 4);
-	var mr = new Squares('mr', 5);
-	var bl = new Squares('bl', 6);
-	var bm = new Squares('bm', 7);
-	var br = new Squares('br', 8);
-}
+function NewSquare(id, inUse) {
+	this.id = id;
+	this.inUse = inUse;
+	}
+var newGame = function(){
+	var table = document.createElement('table');
+	document.body.appendChild(table);
+		var row1 = document.createElement('tr');
+		table.appendChild(row1);
+			var square1 = document.createElement('td');
+			row1.appendChild(square1);
+			s1 = new NewSquare(1, false);
+			var square2 = document.createElement('td');
+			row1.appendChild(square2);
+			s2 = new NewSquare(2, false);
+			var square3 = document.createElement('td');
+			row1.appendChild(square3);
+			s3 = new NewSquare(3, false);
+		var row2 = document.createElement('tr');
+		table.appendChild(row2);
+			var square4 = document.createElement('td');
+			row2.appendChild(square4);
+			s4 = new NewSquare(4, false);
+			var square5 = document.createElement('td');
+			row2.appendChild(square5);
+			s5 = new NewSquare(5, false);
+			var square6 = document.createElement('td');
+			row2.appendChild(square6);
+			s6 = new NewSquare(6, false);
+		var row3 = document.createElement('tr');
+		table.appendChild(row3);
+			var square7 = document.createElement('td');
+			row3.appendChild(square7);
+			s1 = new NewSquare(7, false);
+			var square8 = document.createElement('td');
+			row3.appendChild(square8);
+			s2 = new NewSquare(8, false);
+			var square9 = document.createElement('td');
+			row3.appendChild(square9);
+			s3 = new NewSquare(9, false);
+	var gamepieces = document.querySelectorAll("td");
+	for(var i = 0 ; i < gamepieces.length; i++ ){
+		var imageDiv = document.createElement('div');
+		imageDiv.classList.add("imgDiv");
+		gamepieces[i].appendChild(imageDiv);
+		gamepieces[i].setAttribute('id', i);
+		gamepieces[i].setAttribute('inuse', false);
+		gamepieces[i].addEventListener('click', game.moveStamp);
+	}
+};	
 
+var lebron = new Players('lebron');
+var steph = new Players('steph');
+	
 
+	
 newGame();
-
-
-

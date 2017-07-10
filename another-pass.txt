@@ -1,0 +1,139 @@
+Perspectie
+
+
+High
+
+	-Game
+		Tic-Tac-Toe
+
+		Gameboard
+			Get three in a row to win.
+		
+		Scoreboard
+			tracks whos turn
+		
+		Resetbutton
+			resets the gameboard
+
+
+
+Medium
+
+	-Game
+		Tic-Tac-Toe
+
+		Gameboard
+			attributes:
+				9 Squares
+			
+			features:
+				click on a square to move
+				Get three in a row to win.
+			
+		Scoreboard
+			tracks whos turn
+				counter x
+				counter y
+				counter total.
+				triangle "lights up" to signify turn.
+		
+		Resetbutton
+			resets the gameboard
+				clears board and score.
+				empties move array
+
+		Players
+			two players
+				moveList
+				moveStamp
+
+
+
+Low
+
+var game = {
+		
+	var moveStamp : function(ev)
+		//recieves click
+		if(ev.inUse !== true){
+			this.claimSquare();
+			}else{
+			return null;
+			}
+
+	var claimSquare : function();
+		var activeUser = querySelector(".myTurn");
+			
+		this.innerHTML = activeUser.src_value
+			
+		activeUser.moveList.push(this.locationID);
+			
+		winningCombinations(activeUser.name);
+			
+			this.inUse = true;
+			scoreboard.turnTracker();
+
+
+	Players: function(name, src_value){
+			name : name
+			src_value : "src:" + src_value
+			moveList : moveList || [];
+	}
+
+	var newGame: function(){
+			game.reset();
+			var table = document.createElement('table');
+				document.body.appendChild(table);
+				var NewSquare = function(el, locationID, inUse){
+					var new = document.createElement('el');
+					new.locationID: locationID;
+					new.inUse: inUse || false;
+					this.addEventListener('click', moveStamp);
+					table.appendChild(new);	
+					}	
+		}
+
+				
+
+			winning combinations: array of sets of 3 concatinated ids
+				compares to combinations formed in player.movelist.
+				if a match is found
+					end game(winner);
+				if counter(total) reachs 10
+					end game(tie) 
+			
+		Scoreboard
+			global tracker
+				diplays value on page 
+				total value =  squares(n){inUse : true}; 
+				
+
+			turn tracker
+				grab all players
+					remove any instance of class myTurn.
+				takes current move count 
+				var turn = 0;
+					for(var i = 0 ; i < game.gameboard.length; i++){
+						var current = if(squares.inUse === true;){
+								turn += 1;
+							}
+						return turn;
+						if (turn % 2 === 0){
+							"player1".classList.add('myTurn');
+							console.log("it is " + player1 + "'s turn");
+						} else if (turn % 2 === 1){
+							"player2".classList.add('myTurn');
+							console.log("it is " + player2 + "'s turn");
+						}
+					}
+
+				
+		
+		Reset = function (){
+			total = 0;
+			document.body.remove('table');
+			player1.moveList = [];
+			player2.moveList = [];
+		}
+
+}
