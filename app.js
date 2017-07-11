@@ -2,8 +2,8 @@
 var total = 0;
 var wincount = 0;
 var winner = [["012"],["345"],["678"],["036"],["147"],["258"],["048"],["246"]];
-
-
+var runItBack = document.getElementById('reset');
+	runItBack.addEventListener('click', alert);
 var claimSquare = function(location, myTurn){
 			var here = document.getElementById(location);
 			here.setAttribute('inuse', 'true');
@@ -11,40 +11,33 @@ var claimSquare = function(location, myTurn){
 			stamp.classList.add(myTurn);
 		};
 	
+var game = {		
 
-var game = {
-		
-		reset : function (){
-			getElementById('reset').addEventListener('click', newGame);
-		},
-
-		moveStamp : function(){
-			var inuse = this.getAttribute('inuse');
-			var location = this.getAttribute('id');
-			var myTurn = '';
-			if(inuse !== true){
-				total += 1;
-				inuse = true;
-				if(total === 10){
-					alert("It's a draw");
-					newGame();
-				}else if(total % 2 === 0){
-					myTurn = lebron.name;
-					lebron.moveList.push(location);
-					//checkForWinner(lebron.moveList);
-				}else if (total % 2 === 1){
-					myTurn = steph.name;
-					steph.moveList.push(location);
-					checkForWinner(steph.moveList);
-					}
-				claimSquare(location, myTurn);
-				
-			}else{return(null);}
-		}
+	moveStamp : function(){
+		var inuse = this.getAttribute('inuse');
+		var location = this.getAttribute('id');
+		var myTurn = '';
+		if(inuse !== 'true'){
+			total += 1;
+			inuse = true;
+			if(total === 10){
+				alert("It's a draw");
+				newGame();
+			}else if(total % 2 === 0){
+				myTurn = lebron.name;
+				lebron.moveList.push(location);
+			}else if (total % 2 === 1){
+				myTurn = steph.name;
+				steph.moveList.push(location);
+				checkForWinner(steph.moveList);
+				}
+			claimSquare(location, myTurn);
+			
+		}else{alert("That square is already in play dumb dumb");}
+	}
 	
 };
 	
-
 function Players(name) {
 	this.name = name;
 	this.moveList = [];
@@ -55,56 +48,17 @@ function checkForWinner(array){
 	array.join();
 	console.log(array);}
 
-// 	var counter = 0;
-// 	for( i = 0; i < array.length; i++){
-// 		if(array.length < 3){
-// 			return;
-// 		}else{	
-// 		return;}{
-// 			var location = array[i].getAttribute('id');
-// 			if(location[1] === location[0]+1 || location[0] + 3 || location[0]+ 4){
-// 				console.log('hi');
-// 			}
-// 			counter+= 1;
-// 			console.log(counter);
-// 		}
-// 	}
-// }
-	
-// 	//if(i = 0; i < arr.length; i++){
-
-	
-// var checkAgain = function(arr){
-
-// 	for(var i = 0; i < winner.length; i++){
-// 		console.log(i);
-// 	var wincount = 0;
-// 		for(var j = 0; j < winner[i].length; j++){
-// 			console.log(winner[i]);
-// 			console.log(winner[j]);
-// 			console.log(winner[i][j]);
-// 			console.log(arr.indexOf(winner[i][j]));}}};	 		
-// 	//if(arr.indexOf(winner[i][j]) !== -1){
-// 	// 			wincount++;
-// 		// 	}	
-// 		// }
-// 		// if(wincount === 3){
-// 		// 	alert('game over');}}
-
-
-			
-
-
-
 function NewSquare(id, inUse) {
 	this.id = id;
 	this.inUse = inUse;
 	}
 var newGame = function(){
 	total = 0;
-	var oldGame = document.getElementsByTagName('body');
-	oldGame.firstChild.remove();
+	var oldGame = document.getElementById('board');
+	if(oldGame !== null)
+		{oldGame.remove();}
 	var table = document.createElement('table');
+	table.setAttribute('id', 'board');
 	document.body.appendChild(table);
 		var row1 = document.createElement('tr');
 		table.appendChild(row1);
@@ -139,6 +93,7 @@ var newGame = function(){
 			var square9 = document.createElement('td');
 			row3.appendChild(square9);
 			s3 = new NewSquare(9, false);
+	runItBack.addEventListener('click', newGame);
 	var gamepieces = document.querySelectorAll("td");
 	for(var i = 0 ; i < gamepieces.length; i++ ){
 		var imageDiv = document.createElement('div');
@@ -151,8 +106,6 @@ var newGame = function(){
 };	
 
 var lebron = new Players('lebron');
-var steph = new Players('steph');
-	
-
+var steph = new Players('steph');	
 	
 newGame();
